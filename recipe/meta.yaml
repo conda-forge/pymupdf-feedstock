@@ -7,9 +7,7 @@ package:
 
 source:
   url: https://github.com/pymupdf/PyMuPDF/archive/{{ version }}.tar.gz
-  sha256: 68f3cb582683061ac39368193613627e5741f1edf01903cc748fc07317d83ef9
-  patches:
-    - setup.patch
+  sha256: 920d08215c7bbb554b3a4c2aa688be442ae1bd23fdd3bce92dc5b48519286c93
 
 build:
   skip: true  # [not linux]
