@@ -1,5 +1,5 @@
 {% set name = "pymupdf" %}
-{% set version = "1.24.0" %}
+{% set version = "1.24.1" %}
 
 package:
   name: {{ name|lower }}
