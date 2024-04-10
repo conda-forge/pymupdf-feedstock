@@ -1,5 +1,5 @@
 {% set name = "pymupdf" %}
-{% set version = "1.22.2" %}
+{% set version = "1.24.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,14 +7,12 @@ package:
 
 source:
   url: https://github.com/pymupdf/PyMuPDF/archive/{{ version }}.tar.gz
-  sha256: 68f3cb582683061ac39368193613627e5741f1edf01903cc748fc07317d83ef9
-  patches:
-    - setup.patch
+  sha256: e4695f0d32b9c9715e1ace67617b32e4f5e7a5a404b887d932a6795d0290024c
 
 build:
   skip: true  # [not linux]
-  script: PYMUPDF_SETUP_MUPDF_BUILD="" PYMUPDF_SETUP_MUPDF_REBUILD=0 {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 1
+  script: PYMUPDF_SETUP_MUPDF_BUILD="" PYMUPDF_SETUP_MUPDF_REBUILD=0 PYMUPDF_MUPDF_LIB="$PREFIX/lib" PYMUPDF_INCLUDES="$PREFIX/include -I$PREFIX/include/mupdf -I$PREFIX/include/freetype2" {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
 
 requirements:
   build:
