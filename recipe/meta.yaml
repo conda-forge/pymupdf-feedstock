@@ -1,5 +1,5 @@
 {% set name = "pymupdf" %}
-{% set version = "1.24.5" %}
+{% set version = "1.24.7" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/pymupdf/PyMuPDF/archive/{{ version }}.tar.gz
-  sha256: 4d04a5397512d59b9a7dda81822a466872fba01c876a5b233146751d98e6afbd
+  sha256: 73e164e072858f1493c03bfe4b7c3346486cbf483cea116b9949e553ed606b9e
 
 build:
   skip: true  # [not linux]
