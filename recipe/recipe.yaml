@@ -22,14 +22,14 @@ requirements:
     - ${{ compiler('cxx') }}
     - ${{ stdlib("c") }}
     - swig
-    - mupdf=1.24.9
+    - mupdf =1.24.9
   host:
     - python
     - pip
-    - mupdf=1.24.9
+    - mupdf =1.24.9
   run:
     - python
-    - mupdf=1.24.9
+    - mupdf =1.24.9
 
 tests:
   - python:
@@ -52,4 +52,3 @@ extra:
   recipe-maintainers:
     - jan-janssen
     - moritzwilksch
-
