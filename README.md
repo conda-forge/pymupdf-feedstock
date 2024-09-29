@@ -3,7 +3,7 @@ About pymupdf-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/pymupdf-feedstock/blob/main/LICENSE.txt)
 
-Home: https://github.com/pymupdf/pymupdf
+
 
 Package license: AGPL-3.0-or-later
 
@@ -45,13 +45,6 @@ Current build status
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22006&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/pymupdf-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_python3.12.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_64_python3.8.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=22006&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/pymupdf-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_python3.8.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -191,4 +184,5 @@ Feedstock Maintainers
 =====================
 
 * [@jan-janssen](https://github.com/jan-janssen/)
+* [@moritzwilksch](https://github.com/moritzwilksch/)
 
