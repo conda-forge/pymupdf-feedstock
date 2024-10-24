@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://github.com/pymupdf/PyMuPDF/archive/${{ version }}.tar.gz
-  sha256: 76fc037d37e6879af5b3507c08f34f737852bf3ce5dc0968aa23b8ef79dddb02
+  sha256: 8396a06a0301f2a4c46e30c16ee034953edd8be97950f941b7e58e57337aefb6
 
 build:
   number: 0
@@ -26,6 +26,7 @@ requirements:
   host:
     - python
     - pip
+    - setuptools
     - mupdf =1.24.10
   run:
     - python
