@@ -3,7 +3,7 @@ About pymupdf-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/pymupdf-feedstock/blob/main/LICENSE.txt)
 
-
+Home: https://github.com/pymupdf/pymupdf
 
 Package license: AGPL-3.0-or-later
 
