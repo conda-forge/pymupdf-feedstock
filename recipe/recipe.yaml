@@ -1,6 +1,6 @@
 context:
   name: pymupdf
-  version: 1.24.10
+  version: 1.24.11
 
 package:
   name: ${{ name|lower }}
@@ -26,10 +26,10 @@ requirements:
   host:
     - python
     - pip
-    - mupdf =1.24.9
+    - mupdf =1.24.10
   run:
     - python
-    - mupdf =1.24.9
+    - mupdf =1.24.10
 
 tests:
   - python:
