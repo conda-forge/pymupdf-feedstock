@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://github.com/pymupdf/PyMuPDF/archive/${{ version }}.tar.gz
-  sha256: 5674527e688c6bca7cb992aa79e250a61903114ac699bb08a9ba54f1fc33af5a
+  sha256: de7a9bd4462ad38870ba3f2bdcb94f2ac2894a826551eba1f64715d70223f054
 
 build:
   number: 0
