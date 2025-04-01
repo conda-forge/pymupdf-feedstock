@@ -1,6 +1,6 @@
 context:
   name: pymupdf
-  version: "1.25.4"
+  version: "1.25.5"
 
 package:
   name: ${{ name|lower }}
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://github.com/pymupdf/PyMuPDF/archive/${{ version }}.tar.gz
-  sha256: d7c200e231ec5de05d006e1f9105ca622a1e373a71d2d03e21c752298d234bf0
+  sha256: ad843d04ba9ca171b2c318aeb274c537f7f86d584f601e3db5401cc79bc0520b
 
 build:
   number: 0
