@@ -23,25 +23,26 @@ requirements:
     - ${{ stdlib("c") }}
     - swig
     - mupdf =1.25.2
+    - libgumbo
   host:
     - python
     - pip
     - setuptools
     - mupdf =1.25.2
+    - libgumbo
   run:
     - python
     - mupdf =1.25.2
-
-tests:
-  - python:
-      imports:
-        - fitz
-        - pymupdf
-      pip_check: true
-  - requirements:
-      run:
-        - pip
-    script: pip check
+    - libgumbo
+test:
+  imports:
+    - fitz
+    - pymupdf
+  requires: 
+    - libgumbo
+    - pip
+  commands:
+    - pip check
 
 about:
   summary: A high performance Python library for data extraction, analysis, conversion & manipulation of PDF (and other) documents.
