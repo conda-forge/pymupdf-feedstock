@@ -34,15 +34,19 @@ requirements:
     - python
     - mupdf =1.25.2
     - libgumbo
-test:
-  imports:
-    - fitz
-    - pymupdf
-  requires: 
-    - libgumbo
-    - pip
-  commands:
-    - pip check
+
+tests:
+  - python:
+      imports:
+        - fitz
+        - pymupdf
+      pip_check: true
+  - requirements:
+      run:
+        - pip
+        - libgumbo
+    script: pip check
+
 
 about:
   summary: A high performance Python library for data extraction, analysis, conversion & manipulation of PDF (and other) documents.
