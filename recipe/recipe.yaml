@@ -11,10 +11,10 @@ source:
   sha256: 5f9670733bbb05faae0a4d71bfb11a513a03929e05cbc233c5a88b5eeadbf5b2
 
 build:
-  number: 0
+  number: 1
   skip:
-    - not linux
-  script: PYMUPDF_SETUP_MUPDF_BUILD="" PYMUPDF_SETUP_MUPDF_REBUILD=0 PYMUPDF_MUPDF_LIB="$PREFIX/lib" PYMUPDF_INCLUDES="$PREFIX/include -I$PREFIX/include/mupdf -I$PREFIX/include/freetype2" pip install . -vv --no-deps --no-build-isolation
+    - not linux and not osx
+  script: PYMUPDF_SETUP_MUPDF_BUILD="" PYMUPDF_SETUP_MUPDF_REBUILD=0 PYMUPDF_MUPDF_LIB="$PREFIX/lib" PYMUPDF_INCLUDES="$PREFIX/include -I$PREFIX/include/mupdf -I$PREFIX/include/freetype2" -lgumbo pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   build:
@@ -23,14 +23,17 @@ requirements:
     - ${{ stdlib("c") }}
     - swig
     - mupdf =1.25.2
+    - libgumbo
   host:
     - python
     - pip
     - setuptools
     - mupdf =1.25.2
+    - libgumbo
   run:
     - python
     - mupdf =1.25.2
+    - libgumbo
 
 tests:
   - python:
@@ -41,7 +44,9 @@ tests:
   - requirements:
       run:
         - pip
+        - libgumbo
     script: pip check
+
 
 about:
   summary: A high performance Python library for data extraction, analysis, conversion & manipulation of PDF (and other) documents.
