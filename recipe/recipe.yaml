@@ -24,15 +24,15 @@ requirements:
     - ${{ compiler('cxx') }}
     - ${{ stdlib("c") }}
     - swig
-    - mupdf =1.25.2
+    - mupdf =1.27.2
   host:
     - python
     - pip
     - setuptools
-    - mupdf =1.25.2
+    - mupdf =1.27.2
   run:
     - python
-    - mupdf =1.25.2
+    - mupdf =1.27.2
 
 tests:
   - python:
