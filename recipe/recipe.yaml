@@ -9,6 +9,8 @@ package:
 source:
   url: https://github.com/pymupdf/PyMuPDF/archive/${{ version }}.tar.gz
   sha256: 26760a638cd0f8a64ce7d0a3a78d4df8855de2c8a0c59b39b77a689f61af91d7
+  patches:
+    - system-mupdf.patch
 
 build:
   number: 0
@@ -16,16 +18,15 @@ build:
     - if: unix
       then: LD="$CXX" PYMUPDF_SETUP_MUPDF_BUILD="" PYMUPDF_SETUP_MUPDF_REBUILD=0 PYMUPDF_MUPDF_LIB="$PREFIX/lib" PYMUPDF_INCLUDES="$PREFIX/include:$PREFIX/include/mupdf:$PREFIX/include/freetype2" pip install . -vv --no-deps --no-build-isolation
     - if: win
-      then: >-
-        python -c "import os, subprocess, sys;
-        os.environ.pop('CC', None);
-        os.environ.pop('CXX', None);
-        os.environ.pop('LD', None);
-        os.environ['PYMUPDF_SETUP_MUPDF_BUILD'] = '';
-        os.environ['PYMUPDF_SETUP_MUPDF_REBUILD'] = '0';
-        os.environ['PYMUPDF_MUPDF_LIB'] = os.environ['LIBRARY_LIB'];
-        os.environ['PYMUPDF_INCLUDES'] = os.path.join(os.environ['LIBRARY_INC'], 'mupdf');
-        sys.exit(subprocess.call(['pip', 'install', '.', '-vv', '--no-deps', '--no-build-isolation']))"
+      then: |
+        set "CC="
+        set "CXX="
+        set "LD="
+        set "PYMUPDF_SETUP_MUPDF_BUILD=system"
+        set "PYMUPDF_SETUP_MUPDF_REBUILD=0"
+        set "PYMUPDF_MUPDF_LIB=%LIBRARY_LIB%"
+        set "PYMUPDF_INCLUDES=%LIBRARY_INC%\mupdf"
+        pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   build:
