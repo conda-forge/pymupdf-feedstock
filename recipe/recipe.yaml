@@ -16,15 +16,16 @@ build:
     - if: unix
       then: LD="$CXX" PYMUPDF_SETUP_MUPDF_BUILD="" PYMUPDF_SETUP_MUPDF_REBUILD=0 PYMUPDF_MUPDF_LIB="$PREFIX/lib" PYMUPDF_INCLUDES="$PREFIX/include:$PREFIX/include/mupdf:$PREFIX/include/freetype2" pip install . -vv --no-deps --no-build-isolation
     - if: win
-      then: |
-        set "CC="
-        set "CXX="
-        set "LD="
-        set "PYMUPDF_SETUP_MUPDF_BUILD="
-        set "PYMUPDF_SETUP_MUPDF_REBUILD=0"
-        set "PYMUPDF_MUPDF_LIB=%LIBRARY_LIB%"
-        set "PYMUPDF_INCLUDES=%LIBRARY_INC%\mupdf"
-        pip install . -vv --no-deps --no-build-isolation
+      then: >-
+        python -c "import os, subprocess, sys;
+        os.environ.pop('CC', None);
+        os.environ.pop('CXX', None);
+        os.environ.pop('LD', None);
+        os.environ['PYMUPDF_SETUP_MUPDF_BUILD'] = '';
+        os.environ['PYMUPDF_SETUP_MUPDF_REBUILD'] = '0';
+        os.environ['PYMUPDF_MUPDF_LIB'] = os.environ['LIBRARY_LIB'];
+        os.environ['PYMUPDF_INCLUDES'] = os.path.join(os.environ['LIBRARY_INC'], 'mupdf');
+        sys.exit(subprocess.call(['pip', 'install', '.', '-vv', '--no-deps', '--no-build-isolation']))"
 
 requirements:
   build:
