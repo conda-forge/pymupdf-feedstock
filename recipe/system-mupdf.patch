@@ -9,3 +9,16 @@
          # Use system mupdf.
          return None, location
 
+@@ -605,7 +605,11 @@ def build():
+
+     # Build MuPDF shared libraries.
+     #
+-    if windows:
++    if not mupdf_local:
++        # Using system MuPDF, no need to build.
++        log(f'Using system mupdf, not building MuPDF.')
++        mupdf_build_dir = None
++    elif windows:
+         mupdf_build_dir = build_mupdf_windows(
+                 mupdf_local,
+                 build_type,
