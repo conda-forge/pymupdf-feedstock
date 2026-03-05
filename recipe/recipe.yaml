@@ -11,7 +11,7 @@ source:
   sha256: 52d72b6943e72d72f1e6c568d1f0966399baad51c89087a3b6e56d4ff1a1b409
 
 build:
-  number: 0
+  number: 1
   skip:
     - not linux
   script: PYMUPDF_SETUP_MUPDF_BUILD="" PYMUPDF_SETUP_MUPDF_REBUILD=0 PYMUPDF_MUPDF_LIB="$PREFIX/lib" PYMUPDF_INCLUDES="$PREFIX/include -I$PREFIX/include/mupdf -I$PREFIX/include/freetype2" pip install . -vv --no-deps --no-build-isolation
