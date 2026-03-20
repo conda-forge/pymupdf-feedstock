@@ -13,7 +13,7 @@ source:
     - system-mupdf.patch
 
 build:
-  number: 0
+  number: 1
   script:
     - if: unix
       then: LD="$CXX" PYMUPDF_SETUP_MUPDF_BUILD="" PYMUPDF_SETUP_MUPDF_REBUILD=0 PYMUPDF_MUPDF_LIB="$PREFIX/lib" PYMUPDF_INCLUDES="$PREFIX/include:$PREFIX/include/mupdf:$PREFIX/include/freetype2" pip install . -vv --no-deps --no-build-isolation
