@@ -1,6 +1,7 @@
 context:
   name: pymupdf
-  version: "1.27.1"
+  version: "1.27.2.2"
+  mupdf_version: "1.27.2"
 
 package:
   name: ${{ name|lower }}
@@ -8,7 +9,7 @@ package:
 
 source:
   url: https://github.com/pymupdf/PyMuPDF/archive/${{ version }}.tar.gz
-  sha256: 26760a638cd0f8a64ce7d0a3a78d4df8855de2c8a0c59b39b77a689f61af91d7
+  sha256: 391068b84a5f5e4716168a71b963c6f48a54f232e25494d75be29554fa6ae898
   patches:
     - system-mupdf.patch
 
@@ -38,15 +39,15 @@ requirements:
     - ${{ compiler('cxx') }}
     - ${{ stdlib("c") }}
     - swig
-    - mupdf =${{ version }}
+    - mupdf =${{ mupdf_version }}
   host:
     - python
     - pip
     - setuptools
-    - mupdf =${{ version }}
+    - mupdf =${{ mupdf_version }}
   run:
     - python
-    - mupdf =${{ version }}
+    - mupdf =${{ mupdf_version }}
 
 tests:
   - python:
