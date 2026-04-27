@@ -1,7 +1,7 @@
 context:
   name: pymupdf
-  version: "1.27.2.2"
-  mupdf_version: "1.27.2"
+  version: "1.26.7"
+  mupdf_version: "1.26.12"
 
 package:
   name: ${{ name|lower }}
@@ -9,12 +9,12 @@ package:
 
 source:
   url: https://github.com/pymupdf/PyMuPDF/archive/${{ version }}.tar.gz
-  sha256: 391068b84a5f5e4716168a71b963c6f48a54f232e25494d75be29554fa6ae898
+  sha256: f605e11bb459c258ff04e0003c901cd70b16d3f8f172cd3d11a127debf28d3e3
   patches:
     - system-mupdf.patch
 
 build:
-  number: 1
+  number: 0
   script:
     - if: unix
       then: LD="$CXX" PYMUPDF_SETUP_MUPDF_BUILD="" PYMUPDF_SETUP_MUPDF_REBUILD=0 PYMUPDF_MUPDF_LIB="$PREFIX/lib" PYMUPDF_INCLUDES="$PREFIX/include:$PREFIX/include/mupdf:$PREFIX/include/freetype2" pip install . -vv --no-deps --no-build-isolation
