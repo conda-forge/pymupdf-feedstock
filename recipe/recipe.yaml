@@ -1,7 +1,7 @@
 context:
   name: pymupdf
   version: "1.28.0"
-  mupdf_version: "1.27.2"
+  mupdf_version: "1.28.0"
 
 package:
   name: ${{ name|lower }}
@@ -44,6 +44,7 @@ requirements:
     - python
     - pip
     - setuptools
+    - pipcl
     - mupdf =${{ mupdf_version }}
   run:
     - python
