@@ -1,6 +1,6 @@
 context:
   name: pymupdf
-  version: "1.28.0"
+  version: "1.28.2"
   mupdf_version: "1.28.0"
 
 package:
@@ -9,7 +9,7 @@ package:
 
 source:
   url: https://github.com/pymupdf/PyMuPDF/archive/${{ version }}.tar.gz
-  sha256: 20920e04b48d248454b2eb6086de26c3baff55e5d66530530174a4d4e02c0410
+  sha256: 23a64814bb9dce3088256c6bed981b03a163aa232a6f698180432b9a5990a891
   patches:
     - system-mupdf.patch
 
