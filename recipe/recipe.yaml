@@ -14,7 +14,7 @@ source:
     - system-mupdf.patch
 
 build:
-  number: 1
+  number: 2
   script:
     - if: unix
       then: LD="$CXX" PYMUPDF_SETUP_MUPDF_BUILD="" PYMUPDF_SETUP_MUPDF_REBUILD=0 PYMUPDF_MUPDF_LIB="$PREFIX/lib" PYMUPDF_INCLUDES="$PREFIX/include:$PREFIX/include/mupdf:$PREFIX/include/freetype2" pip install . -vv --no-deps --no-build-isolation
@@ -27,6 +27,10 @@ build:
         set "PYMUPDF_SETUP_MUPDF_REBUILD=0"
         set "PYMUPDF_MUPDF_LIB=%LIBRARY_LIB%"
         set "PYMUPDF_INCLUDES=%LIBRARY_INC%\mupdf"
+        REM pipcl locates python3.lib at <include>\..\libs, which is wrong for
+        REM Python >=3.15 where headers moved to %PREFIX%\include\python.
+        REM link.exe reads extra options from the LINK env var.
+        set "LINK=/LIBPATH:%PREFIX%\libs %LINK%"
         pip install . -vv --no-deps --no-build-isolation
 
 requirements:
