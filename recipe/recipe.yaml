@@ -1,7 +1,7 @@
 context:
   name: pymupdf
   version: "2.0"
-  mupdf_version: "1.28.0"
+  mupdf_version: "1.28.5"
 
 package:
   name: ${{ name|lower }}
@@ -27,6 +27,10 @@ build:
         set "PYMUPDF_SETUP_MUPDF_REBUILD=0"
         set "PYMUPDF_MUPDF_LIB=%LIBRARY_LIB%"
         set "PYMUPDF_INCLUDES=%LIBRARY_INC%\mupdf"
+        REM pipcl locates python3.lib at <include>\..\libs, which is wrong for
+        REM Python >=3.15 where headers moved to %PREFIX%\include\python.
+        REM link.exe reads extra options from the LINK env var.
+        set "LINK=/LIBPATH:%PREFIX%\libs %LINK%"
         pip install . -vv --no-deps --no-build-isolation
 
 requirements:
@@ -38,10 +42,7 @@ requirements:
     - ${{ compiler('c') }}
     - ${{ compiler('cxx') }}
     - ${{ stdlib("c") }}
-    # SWIG 4.5.0 dropped the Python 2 -> 3 compatibility shims that PyMuPDF's
-    # src/extra.i relies on, causing 'PyString_FromString' undeclared errors.
-    # Pin below 4.5 until upstream PyMuPDF supports SWIG 4.5.
-    - swig <4.5
+    - swig
     - mupdf =${{ mupdf_version }}
   host:
     - python
