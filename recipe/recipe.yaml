@@ -1,7 +1,7 @@
 context:
   name: pymupdf
-  version: "1.28.0"
-  mupdf_version: "1.28.0"
+  version: "2.0"
+  mupdf_version: "1.28.5"
 
 package:
   name: ${{ name|lower }}
@@ -9,25 +9,34 @@ package:
 
 source:
   url: https://github.com/pymupdf/PyMuPDF/archive/${{ version }}.tar.gz
-  sha256: 20920e04b48d248454b2eb6086de26c3baff55e5d66530530174a4d4e02c0410
+  sha256: bff4d72489971c7a019e38d59ddbfd5db989764ce50d9633ca5b0b08d33349ef
   patches:
     - system-mupdf.patch
 
 build:
   number: 1
   script:
-    - if: unix
-      then: LD="$CXX" PYMUPDF_SETUP_MUPDF_BUILD="" PYMUPDF_SETUP_MUPDF_REBUILD=0 PYMUPDF_MUPDF_LIB="$PREFIX/lib" PYMUPDF_INCLUDES="$PREFIX/include:$PREFIX/include/mupdf:$PREFIX/include/freetype2" pip install . -vv --no-deps --no-build-isolation
-    - if: win
-      then: |
-        set "CC="
-        set "CXX="
-        set "LD="
-        set "PYMUPDF_SETUP_MUPDF_BUILD=system"
-        set "PYMUPDF_SETUP_MUPDF_REBUILD=0"
-        set "PYMUPDF_MUPDF_LIB=%LIBRARY_LIB%"
-        set "PYMUPDF_INCLUDES=%LIBRARY_INC%\mupdf"
-        pip install . -vv --no-deps --no-build-isolation
+    env:
+      # The limited API is not supported with free-threaded Python (PEP 803),
+      # and pipcl asserts if both are requested.
+      PYMUPDF_SETUP_PY_LIMITED_API: ${{ "0" if is_freethreading else "1" }}
+    content:
+      - if: unix
+        then: LD="$CXX" PYMUPDF_SETUP_MUPDF_BUILD="" PYMUPDF_SETUP_MUPDF_REBUILD=0 PYMUPDF_MUPDF_LIB="$PREFIX/lib" PYMUPDF_INCLUDES="$PREFIX/include:$PREFIX/include/mupdf:$PREFIX/include/freetype2" pip install . -vv --no-deps --no-build-isolation
+      - if: win
+        then: |
+          set "CC="
+          set "CXX="
+          set "LD="
+          set "PYMUPDF_SETUP_MUPDF_BUILD=system"
+          set "PYMUPDF_SETUP_MUPDF_REBUILD=0"
+          set "PYMUPDF_MUPDF_LIB=%LIBRARY_LIB%"
+          set "PYMUPDF_INCLUDES=%LIBRARY_INC%\mupdf"
+          REM pipcl locates python3.lib at <include>\..\libs, which is wrong for
+          REM Python >=3.15 where headers moved to %PREFIX%\include\python.
+          REM link.exe reads extra options from the LINK env var.
+          set "LINK=/LIBPATH:%PREFIX%\libs %LINK%"
+          pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   build:
