@@ -1,7 +1,7 @@
 context:
   name: pymupdf
   version: "2.1"
-  mupdf_version: "1.28.5"
+  mupdf_version: "1.28.6"
 
 package:
   name: ${{ name|lower }}
@@ -14,7 +14,7 @@ source:
     - system-mupdf.patch
 
 build:
-  number: 0
+  number: 1
   script:
     env:
       # The limited API is not supported with free-threaded Python (PEP 803),
